@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistem Manajemen Data Mahasiswa</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Data Teman Mahasiswa</h1>
+      <div class="table-container">
+        <table id="studentTable">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>NIM</th>
+              <th>Nama</th>
+              <th>Kelas</th>
+              <th>Prodi</th>
+              <th>Alamat</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Data akan diisi melalui JavaScript -->
+          </tbody>
+        </table>
+      </div>
+      <div class="controls">
+        <button id="addButton" class="btn add-btn">+ Tambah Data</button>
+        <button id="saveToLocalStorage" class="btn save-btn">
+          💾 Simpan ke Local Storage
+        </button>
+        <button id="saveToAPI" class="btn save-btn">🌐 Simpan ke API</button>
+        <button id="loadFromLocalStorage" class="btn load-btn">
+          📂 Muat dari Local Storage
+        </button>
+        <button id="loadFromAPI" class="btn load-btn">🔄 Muat dari API</button>
+        <button id="clearDataBtn" class="btn clear-btn">
+          🗑️ Hapus Semua Data
+        </button>
+      </div>
+      <div id="loadingIndicator" style="display: none">Loading...</div>
+      <div id="message" class="message" style="display: none"></div>
+      <div id="storageMessage" class="message" style="display: none"></div>
+    </div>
+
+    <!-- Template untuk modal edit -->
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" id="closeEditModal">&times;</span>
+        <h2>Edit Data Mahasiswa</h2>
+        <form id="editForm">
+          <div class="form-group">
+            <label for="editNim">NIM:</label>
+            <input type="text" id="editNim" name="nim" maxlength="9" required />
+            <span class="error-message" id="nimError"></span>
+          </div>
+          <div class="form-group">
+            <label for="editNama">Nama:</label>
+            <input type="text" id="editNama" name="nama" required />
+            <span class="error-message" id="namaError"></span>
+          </div>
+          <div class="form-group">
+            <label for="editKelas">Kelas:</label>
+            <input type="text" id="editKelas" name="kelas" required />
+          </div>
+          <div class="form-group">
+            <label for="editProdi">Prodi:</label>
+            <input
+              type="text"
+              id="editProdi"
+              name="prodi"
+              list="prodiList"
+              required
+            />
+            <datalist id="prodiList">
+              <option value="Perbankan Syariah (S1)"></option>
+              <option value="Manajemen Bisnis Syariah (S1)"></option>
+              <option value="Sistem Informasi (S1)"></option>
+              <option value="Bisnis Digital (S1)"></option>
+              <option value="Komputerisasi Akuntansi (D3)"></option>
+              <option value="Agribisnis (S1)"></option>
+              <option value="Teknologi Pangan (S1)"></option>
+              <option value="Pendidikan Bahasa Inggris (S1)"></option>
+              <option value="Bimbingan dan Konseling (S1)"></option>
+              <option value="Teknik Industri (S1)"></option>
+              <option value="Informatika (S1)"></option>
+            </datalist>
+          </div>
+          <div class="form-group">
+            <label for="editAlamat">Alamat:</label>
+            <textarea id="editAlamat" name="alamat" required></textarea>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn save-btn">Simpan</button>
+            <button type="button" class="btn cancel-btn" id="cancelEdit">
+              Batal
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Template untuk konfirmasi hapus -->
+    <div id="deleteConfirmModal" class="modal">
+      <div class="modal-content confirm-modal">
+        <h2>Konfirmasi Hapus</h2>
+        <p>Anda yakin ingin menghapus data ini?</p>
+        <div class="form-actions">
+          <button id="confirmDelete" class="btn delete-btn">Hapus</button>
+          <button id="cancelDelete" class="btn cancel-btn">Batal</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input cell editor yang akan muncul saat double click -->
+    <div id="cellEditor" class="cell-editor">
+      <input type="text" id="cellInput" />
+      <div class="cell-editor-actions">
+        <button id="cellSaveBtn" class="cell-btn">OK</button>
+        <button id="cellCancelBtn" class="cell-btn">Cancel</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
